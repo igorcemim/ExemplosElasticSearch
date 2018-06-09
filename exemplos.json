@@ -1,0 +1,71 @@
+# Apaga o índice (se existir)
+DELETE /megacorp
+
+# Importa dados de exemplo
+POST /megacorp/employee/_bulk
+{ "index": { "_id" : 1 } }
+{ "first_name" : "John", "last_name" : "Smith", "age" : 25, "about" : "I love to go rock climbing", "interests": [ "sports", "music" ] }
+{ "index": { "_id" : 2 } }
+{ "first_name" : "Jane", "last_name" : "Smith", "age" : 32, "about" : "I like to collect rock albums", "interests":  [ "music" ] }
+{ "index": { "_index": "megacorp", "_type": "employee", "_id": 3 }}
+{ "first_name" : "Douglas", "last_name" : "Fir", "age" : 35, "about": "I like to build cabinets", "interests":  [ "forestry" ] }
+
+# Altera os dados de um documento
+PUT /megacorp/employee/3
+{
+    "first_name" : "Douglas",
+    "last_name" : "Fir",
+    "age" : 35,
+    "about" : "I like to build cabinets",
+    "interests" : [ "forestry" ]
+}
+
+# Busca em todos os índices
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# Busca sem filtros no índice /megacorp
+GET /megacorp/employee/_search
+
+# Busca por sobrenome
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}
+
+# Busca por sobrenome e faixa de idade
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "bool" : {
+            "must" : {
+                "match" : {
+                    "last_name" : "smith" 
+                }
+            },
+            "filter" : {
+                "range" : {
+                    "age" : { "gt" : 30 } 
+                }
+            }
+        }
+    }
+}
+
+# Busca exatamente uma frase
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match_phrase" : {
+            "about" : "rock climbing"
+        }
+    }
+}
