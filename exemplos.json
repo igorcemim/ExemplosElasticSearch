@@ -69,3 +69,39 @@ GET /megacorp/employee/_search
         }
     }
 }
+
+POST _analyze
+{
+  "analyzer": "standard",
+  "text": "Not only did the Pentium Pro implement out-of-order execution to improve performance by allowing the CPU to re-order instructions for optimal execution, it also began the now-standard process of decoding x86 instructions into RISC-like micro-ops for more efficient execution."
+}
+
+POST _analyze
+{
+  "analyzer": "whitespace",
+  "text": "Not only did the Pentium Pro implement out-of-order execution to improve performance by allowing the CPU to re-order instructions for optimal execution, it also began the now-standard process of decoding x86 instructions into RISC-like micro-ops for more efficient execution."
+}
+
+POST _analyze
+{
+  "analyzer": "english",
+  "text": "Not only did the Pentium Pro implement out-of-order execution to improve performance by allowing the CPU to re-order instructions for optimal execution, it also began the now-standard process of decoding x86 instructions into RISC-like micro-ops for more efficient execution."
+}
+
+POST _analyze
+{
+  "analyzer": "brazilian",
+  "text": "computador computadores"
+}
+
+POST _analyze
+{
+  "analyzer": "brazilian",
+  "text": "associado associação"
+}
+
+POST _analyze
+{
+  "analyzer": "brazilian",
+  "text": "A imaginação é mais importante que o conhecimento, Albert Einsten"
+}
