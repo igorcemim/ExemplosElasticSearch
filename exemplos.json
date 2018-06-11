@@ -60,6 +60,16 @@ GET /megacorp/employee/_search
     }
 }
 
+# Busca somente por faixa de idade
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "range" : {
+            "age" : { "gt" : 30, "lt": 50 } 
+        }
+    }
+}
+
 # Busca exatamente uma frase
 GET /megacorp/employee/_search
 {
